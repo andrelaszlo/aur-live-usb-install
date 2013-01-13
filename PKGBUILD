@@ -1,18 +1,18 @@
 pkgname=live-usb-install
-pkgver=2.3.2
+pkgver=2.3.8
 pkgrel=1
 pkgdesc="LiveUSB Install - Create bootable usb sticks from a wide range of different Linux distributions"
 url="http://live.learnfree.eu"
 license=('GPL')
-arch=('i686')
-source=('http://download.learnfree.eu/lfu-usb/live-usb-install-2.3.2.tar.gz')
-md5sums=('bc3819f81254f814b8e31c022870321e')
+arch=('i686' 'x86_64')
+source=('http://download.learnfree.eu/lfu-usb/live-usb-install-2.3.8.tar.gz')
+md5sums=('aff9cf09c9c2d4f8ad3b863c1faf9549')
 
 # Requires python 2.6, python-glade2, syslinux, wget, p7zip-full, unrar, hal or
 # udev, parted, optional python-libtorrent (needed for downloading some
 # distributions from Internet)
 
-depends=('python2' 'pygtk' 'libglade' 'syslinux' 'wget' 'p7zip' 'unrar' 'udev' 'parted' 'gksu')
+depends=('python2' 'pygtk' 'libglade' 'syslinux' 'wget' 'p7zip' 'unrar' 'udev' 'parted' 'gksu' 'python2-dbus')
 
 build() {
     cd $startdir/src/
@@ -24,6 +24,9 @@ build() {
 	mkdir -p $INSTALL_DIR/pixmaps
     mkdir -p $INSTALL_DIR/$pkgname
     mkdir -p $INSTALL_DIR/applications
+
+	# quick hack to replace python with python2, TODO: make a patch for arch
+	sed -i 's!#\!/usr/bin/env python!#\!/usr/bin/env python2!g' live-usb-install.py
 
     cp -r asubprocess.py\
 	   	  live-usb-install.py\
@@ -43,5 +46,6 @@ build() {
 
 	cp logo.png $INSTALL_DIR/pixmaps/live-usb-install.png
 
+	# create desktop entry
 	echo -e "[Desktop Entry]\nVersion=1.0\nName=LiveUSB Install\nComment=Tool for creating Live USB drives\nCategories=Application;System;\nExec=gksu python2 /usr/share/$pkgname/live-usb-install.py\nTerminal=false\nType=Application\nName[en_US]=LiveUSB Install\nGenericName[en_US]=LiveUSB Install\nComment[en_US]=Tool for creating Live USB drives\nIcon=live-usb-install" > $INSTALL_DIR/applications/live-usb-install.desktop
 }
