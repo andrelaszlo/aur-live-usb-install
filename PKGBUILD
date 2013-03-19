@@ -1,21 +1,21 @@
 pkgname=live-usb-install
-pkgver=2.3.8
-pkgrel=1
+pkgver=2.3.10
+pkgrel=2
 pkgdesc="LiveUSB Install - Create bootable usb sticks from a wide range of different Linux distributions"
 url="http://live.learnfree.eu"
 license=('GPL')
 arch=('i686' 'x86_64')
-source=('http://download.learnfree.eu/lfu-usb/live-usb-install-2.3.8.tar.gz')
-md5sums=('aff9cf09c9c2d4f8ad3b863c1faf9549')
+source=('http://download.learnfree.eu/lfu-usb/live-usb-install-2.3.10.tar.gz')
+md5sums=('845c2975382e01885a7e8876d17a74cd')
 
 # Requires python 2.6, python-glade2, syslinux, wget, p7zip-full, unrar, hal or
 # udev, parted, optional python-libtorrent (needed for downloading some
 # distributions from Internet)
 
-depends=('python2' 'pygtk' 'libglade' 'syslinux' 'wget' 'p7zip' 'unrar' 'udev' 'parted' 'gksu' 'python2-dbus')
+depends=('python2' 'pygtk' 'libglade' 'syslinux' 'wget' 'p7zip' 'mtools' 'unrar' 'udev' 'parted' 'gksu' 'python2-dbus')
 
 build() {
-    cd $startdir/src/
+    cd $srcdir
 
     PKG_DIR="../pkg"
     INSTALL_DIR="$PKG_DIR/usr/share"
