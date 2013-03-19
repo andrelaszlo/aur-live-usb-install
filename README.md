@@ -16,4 +16,4 @@ repository is intended mostly for people interested in contributing to the AUR
 package itself.
 
 The package was created by by [André Laszlo](http://www.laszlo.nu)
-<firstname@lastname.nu>.
+email: firstname@lastname.nu.
